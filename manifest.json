@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Network Performance Analyser",
+  "version": "1.0",
+  "description": "Analyze the Partnesr's resources performance and store it to Stat-hat",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon16.png",
+    "128": "icon16.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "host_permissions": ["https://*/*", "http://*/"],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/",
+    "https://*/",
+    "alarms",
+    "notifications",
+    "storage",
+    "scripting",
+    "extension"
+  ]
+}
