@@ -4,14 +4,13 @@ let intervalId;
 const STAT_HAT_API_TIMEOUT = 30000;  // IN ms
 const RELOAD_WINDOW_TIMEOUT = 60000;  // IN ms
 
-
 function reloadWindow(windowId, options = {}) {
   chrome.tabs.query({ windowId: windowId }, async (tabs) => {
     const strategy = {};
     for (const i in tabs) {
       const tab = tabs[i];
       chrome.tabs.reload(tab.id, () => {
-        registerTimeoutEvent();
+        //registerTimeoutEvent();
         setTimeout(async () => {
           chrome.tabs.executeScript(tab.id, { file: "stat-hat-executor.js" });
         }, STAT_HAT_API_TIMEOUT);
@@ -33,28 +32,36 @@ chrome.extension.onRequest.addListener((request, sender, sendResponse) => {
   }, RELOAD_WINDOW_TIMEOUT);
 });
 
-// chrome.app.runtime.onLaunched.addListener(function (launchData) {
+/////////////////////////
 
-//   console.log('launchData: on launch: ', launchData);
-
-//   // chrome.app.window.create('index.html', {
-//   //     'state': "maximized"
-//   // });
-//   // // ...
-// });
-
-// chrome.app.runtime.onRestarted.addListener(function () {
-//   console.log('onRestarted');
-// });
-
-// function registerTimeoutEvent() {
-//   window.owpbjs.onEvent("bidTimeout", function (argsss) {
-//     console.log("123>>", argsss);
+// function getCurrentWindow(cb) {
+//   chrome.windows.getCurrent((win) => {
+//     cb(win);
 //   });
 // }
 
-// window?.owpbjs?.onEvent("bidTimeout", function (argsss) {
-//   console.log("123>>", argsss);
-// });
+// function setCustomInterval() {
+//   getCurrentWindow((win) => {
+//     chrome.browserAction.setBadgeText({ text: 'ON' });
+//     chrome.extension.sendRequest({ startInterval: true, windowId: win.id });
+//     //window.close();
+//   });
+// }
+
+// window.onload = function () {
+//   setCustomInterval();
+// };
+
+// function registerTimeoutEvent() {
+//   // alert(window.owpbjs);
+//   // window.owpbjs.onEvent("bidTimeout", function (argsss) {
+//   //   console.log("123>>", argsss);
+//   // });
+//   chrome.extension.sendRequest({ setBidTimeoutevent: true });
+// }
+
+// // window?.owpbjs?.onEvent("bidTimeout", function (argsss) {
+// //   console.log("123>>", argsss);
+// // });
 
 

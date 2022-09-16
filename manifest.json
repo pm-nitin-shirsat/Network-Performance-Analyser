@@ -14,7 +14,6 @@
   "browser_action": {
     "default_popup": "index.html"
   },
-  "host_permissions": ["https://*/*", "http://*/"],
   "permissions": [
     "tabs",
     "activeTab",
@@ -22,8 +21,6 @@
     "https://*/",
     "alarms",
     "notifications",
-    "storage",
-    "scripting",
-    "extension"
+    "storage"
   ]
 }
