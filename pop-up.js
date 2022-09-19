@@ -7,6 +7,8 @@ function getCurrentWindow(cb) {
 }
 
 function clearCustomInterval() {
+  // let elem = document.getElementById("timeout-executor-script");
+  // if (elem) elem.parentNode.removeChild(elem);
   chrome.browserAction.setBadgeText({ text: '' });
   chrome.extension.sendRequest({ startInterval: false });
   window.close();

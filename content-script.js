@@ -3,7 +3,7 @@ function injectScript(url, tag) {
   var script = document.createElement("script");
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', url);
-  script.setAttribute('id', 'timeout-executor');
+  script.setAttribute('id', 'timeout-executor-script');
   node.appendChild(script);
 }
 

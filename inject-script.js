@@ -20,27 +20,21 @@ function getHostName() {
 }
 
 var timeout;
-
 window.owpbjs.onEvent("bidRequested", function (args) {
-  console.log("Requested args: ", args);
+  //console.log("Requested args: ", args);
   timeout = args.timeout;
 });
 
 window.owpbjs.onEvent("bidTimeout", function (timeoutBids) {
-  console.log(timeoutBids);
   const tBids = JSON.parse(JSON.stringify(timeoutBids));
   const stathatUserEmail = "nikunj.sureka@pubmatic.com";
   const url = "https://api.stathat.com/ez";
   const parameterName = "bidTimeout";
   const hostName = getHostName();
   const browserName = getBrowserName();
-  console.log(timeoutBids);
-  debugger;
   for (let index = 0; index < tBids.length; index++) {
     const timeoutBid = tBids[index];
-    console.log(timeout);
     const stathatKeyToUse = `${timeoutBid.bidder}_${browserName}_${hostName}_${parameterName}_${timeout}`;
-    console.log(stathatKeyToUse);
     const data = "time=" + (new Date()).getTime() + "&stat=" + stathatKeyToUse + "&email=" + stathatUserEmail + "&count=1";
     var statHatElement = document.createElement('script');
     statHatElement.src = url + '?' + data;

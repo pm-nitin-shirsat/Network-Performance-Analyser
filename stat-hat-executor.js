@@ -172,7 +172,7 @@ function getTimeValue(endTime, startTime) {
 
 function statHatHatLogger() {
   let performanceResources = window.performance.getEntriesByType("resource");
-  console.log("performanceResources: ", performanceResources);
+  //console.log("performanceResources: ", performanceResources);
 
   const hostName = getHostName();
   const browserName = getBrowserName();
@@ -180,7 +180,7 @@ function statHatHatLogger() {
   for (let performanceResource of performanceResources) {
     let pubConfig = getSSP(performanceResource.name, getPartners());
     if (pubConfig) {
-      console.log(pubConfig.name, performanceResource);
+      //console.log(pubConfig.name, performanceResource);
       const stathatUserEmail = "nikunj.sureka@pubmatic.com";
       const url = "https://api.stathat.com/ez";
       const parameters = getParameters();

@@ -10,7 +10,6 @@ function reloadWindow(windowId, options = {}) {
     for (const i in tabs) {
       const tab = tabs[i];
       chrome.tabs.reload(tab.id, () => {
-        //registerTimeoutEvent();
         setTimeout(async () => {
           chrome.tabs.executeScript(tab.id, { file: "stat-hat-executor.js" });
         }, STAT_HAT_API_TIMEOUT);
@@ -31,37 +30,5 @@ chrome.extension.onRequest.addListener((request, sender, sendResponse) => {
     reloadWindow(request.windowId, {});
   }, RELOAD_WINDOW_TIMEOUT);
 });
-
-/////////////////////////
-
-// function getCurrentWindow(cb) {
-//   chrome.windows.getCurrent((win) => {
-//     cb(win);
-//   });
-// }
-
-// function setCustomInterval() {
-//   getCurrentWindow((win) => {
-//     chrome.browserAction.setBadgeText({ text: 'ON' });
-//     chrome.extension.sendRequest({ startInterval: true, windowId: win.id });
-//     //window.close();
-//   });
-// }
-
-// window.onload = function () {
-//   setCustomInterval();
-// };
-
-// function registerTimeoutEvent() {
-//   // alert(window.owpbjs);
-//   // window.owpbjs.onEvent("bidTimeout", function (argsss) {
-//   //   console.log("123>>", argsss);
-//   // });
-//   chrome.extension.sendRequest({ setBidTimeoutevent: true });
-// }
-
-// // window?.owpbjs?.onEvent("bidTimeout", function (argsss) {
-// //   console.log("123>>", argsss);
-// // });
 
 
