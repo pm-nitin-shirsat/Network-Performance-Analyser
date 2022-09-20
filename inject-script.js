@@ -34,7 +34,7 @@ window.owpbjs.onEvent("bidTimeout", function (timeoutBids) {
   const browserName = getBrowserName();
   for (let index = 0; index < tBids.length; index++) {
     const timeoutBid = tBids[index];
-    const stathatKeyToUse = `${timeoutBid.bidder}_${browserName}_${hostName}_${parameterName}_${timeout}`;
+    const stathatKeyToUse = `${timeoutBid.bidder}_${browserName}_${hostName}_${parameterName}_${countryCode}_${timeout}`;
     const data = "time=" + (new Date()).getTime() + "&stat=" + stathatKeyToUse + "&email=" + stathatUserEmail + "&count=1";
     var statHatElement = document.createElement('script');
     statHatElement.src = url + '?' + data;

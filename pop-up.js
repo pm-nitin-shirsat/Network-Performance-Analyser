@@ -7,17 +7,15 @@ function getCurrentWindow(cb) {
 }
 
 function clearCustomInterval() {
-  // let elem = document.getElementById("timeout-executor-script");
-  // if (elem) elem.parentNode.removeChild(elem);
   chrome.browserAction.setBadgeText({ text: '' });
   chrome.extension.sendRequest({ startInterval: false });
   window.close();
 }
 
-function setCustomInterval() {
+function setCustomInterval(countryCode) {
   getCurrentWindow((win) => {
     chrome.browserAction.setBadgeText({ text: 'ON' });
-    chrome.extension.sendRequest({ startInterval: true, windowId: win.id });
+    chrome.extension.sendRequest({ startInterval: true, windowId: win.id, countryCode: countryCode });
     window.close();
   });
 }
@@ -34,10 +32,16 @@ function setInnerHTML(elem) {
   elem.innerHTML = (getStatHatStatus() === 'ON') ? 'OFF' : 'ON';
 }
 
+function getCountryCode() {
+  let elem = document.getElementById('country-code');
+  if (!elem.value) return "00";
+  return String(elem.value).toUpperCase().substring(0, 2);
+}
+
 function buttonClicked(event) {
   setStatHatStatus(event.target);
   setInnerHTML(event.target);
-  (getStatHatStatus() === 'ON') ? setCustomInterval() : clearCustomInterval();
+  (getStatHatStatus() === 'ON') ? setCustomInterval(getCountryCode()) : clearCustomInterval();
 }
 
 function contentLoaded(event) {
@@ -49,7 +53,3 @@ function contentLoaded(event) {
 document.addEventListener('DOMContentLoaded', contentLoaded);
 
 
-// (function onRestart() {
-//   console.log("Restart called");
-//   (getStatHatStatus() === 'ON') ? setCustomInterval() : clearCustomInterval();
-// })();

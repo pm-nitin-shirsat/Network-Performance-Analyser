@@ -170,7 +170,8 @@ function getTimeValue(endTime, startTime) {
   return endTime - startTime;
 }
 
-function statHatHatLogger() {
+function statHatHatLogger(countryCode = "00") {
+  //("Country code:", countryCode);
   let performanceResources = window.performance.getEntriesByType("resource");
   //console.log("performanceResources: ", performanceResources);
 
@@ -192,7 +193,7 @@ function statHatHatLogger() {
           continue;
         }
 
-        const stathatKeyToUse = `${pubConfig.key}_${browserName}_${hostName}_${parameter.key}_${getBucketKey(value)}`;
+        const stathatKeyToUse = `${pubConfig.key}_${browserName}_${hostName}_${parameter.key}_${countryCode}_${getBucketKey(value)}`;
         const data = "time=" + (new Date()).getTime() + "&stat=" + stathatKeyToUse + "&email=" + stathatUserEmail + "&count=1";
         var statHatElement = document.createElement('script');
         statHatElement.src = url + '?' + data;
@@ -203,5 +204,9 @@ function statHatHatLogger() {
     }
   };
 };
+//statHatHatLogger();
+chrome.storage.local.get('countryCode', function (items) {
+  statHatHatLogger(items.countryCode);
+});
 
-statHatHatLogger();
+
