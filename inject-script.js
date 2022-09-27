@@ -40,7 +40,7 @@ window.owpbjs.onEvent("bidTimeout", function (timeoutBids) {
     statHatElement.src = url + '?' + data;
     statHatElement.async = true;
     document.body.appendChild(statHatElement);
-    console.log("StatHatElement: ", statHatElement);
+    //console.log("StatHatElement: ", statHatElement);
   }
 });
 
